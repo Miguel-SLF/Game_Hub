@@ -1,3 +1,6 @@
+// raiz do app
+
+// imports
 import 'package:flutter/material.dart';
 import 'tela_principal.dart';
 
@@ -10,7 +13,7 @@ class GameHub extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false, 
-      home: TelaPrincipal(),
+      home: TelaPrincipal(), // chama a tela principal como tela inicial
     );
   }
 }

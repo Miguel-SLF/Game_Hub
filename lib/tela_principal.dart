@@ -1,5 +1,6 @@
-//tela principal da home
+// tela principal da home
 
+// imports
 import 'package:flutter/material.dart';
 import 'lista_jogos.dart';
 import 'tela_meus_jogos.dart';
@@ -10,25 +11,26 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
-  // Índice 0 pois esta é a tela Home
-  final int _indiceSelecionado = 0;
+  final int _indiceSelecionado = 0; 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Color.fromARGB(255, 68, 70, 75),
+      backgroundColor: Color.fromARGB(255, 68, 70, 75),
       appBar: AppBar(
-        title:  Text("Game Hub", style: TextStyle(color: Colors.white)),
-        backgroundColor:  Color(0xFF1E1F22),
-        automaticallyImplyLeading: false, 
+        title: Text("Game Hub", style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1F22),
+        automaticallyImplyLeading: false,
       ),
-      
-      body: ListaJogos(), 
-      
+
+      // exibe a lista de jogos 
+      body: ListaJogos(),
+
+      // bottom navigation bar
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _indiceSelecionado, 
-        backgroundColor:  Color(0xFF1E1F22),
-        selectedItemColor:  Color.fromARGB(255, 72, 27, 146),
+        currentIndex: _indiceSelecionado,
+        backgroundColor: Color(0xFF1E1F22),
+        selectedItemColor: Color.fromARGB(255, 72, 27, 146),
         unselectedItemColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         items: [
@@ -39,7 +41,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => TelaMeusJogos()), 
+              MaterialPageRoute(builder: (context) => TelaMeusJogos()),
             );
           }
         },

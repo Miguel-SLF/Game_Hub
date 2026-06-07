@@ -1,10 +1,12 @@
-//pagina de cada jogo separadamente
+// tela de detalhe de cada jogo 
 
+// imports
 import 'package:flutter/material.dart';
-import 'jogos.dart'; 
+import 'jogos.dart';
 
+// recebe o jogo selecionado da lista
 class TelaDetalheJogo extends StatefulWidget {
-  final Jogos jogo; 
+  final Jogos jogo;
 
   TelaDetalheJogo({super.key, required this.jogo});
 
@@ -23,23 +25,24 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
         backgroundColor: Color(0xFF1E1F22),
         iconTheme: IconThemeData(color: Colors.cyanAccent),
       ),
-      
-      body: SingleChildScrollView( 
+
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
               widget.jogo.banner,
               height: 180,
-              width: double.infinity, 
+              width: double.infinity,
               fit: BoxFit.cover,
-            ), 
-            
+            ),
+
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // capa, nome e plataforma 
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -47,49 +50,50 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
                           widget.jogo.capa,
-                          width: 100, 
+                          width: 100,
                           height: 150,
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(width: 16), 
+                      SizedBox(width: 16),
                       
+                      // exibicao da plataforma ou mensagem erro
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.jogo.nome, 
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)
+                              widget.jogo.nome,
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                             ),
                             SizedBox(height: 4),
                             Text(
-                              widget.jogo.plataforma.isNotEmpty 
-                                  ? widget.jogo.plataforma 
+                              widget.jogo.plataforma.isNotEmpty
+                                  ? widget.jogo.plataforma
                                   : "Plataforma indisponível",
-                              style: TextStyle(
-                                fontSize: 14, 
-                                fontStyle: FontStyle.italic, 
-                                color: Colors.grey
-                              ),
+                              style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic, color: Colors.grey),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  
+
                   Divider(height: 30, color: Colors.grey),
 
+                  // descrição do jogo
                   Text(
-                    widget.jogo.descricao, 
-                    style: TextStyle(fontSize: 16, color: Colors.white) 
+                    widget.jogo.descricao,
+                    style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
+
                   Divider(height: 30, color: Colors.grey),
-                  
+
+                  // botões de status do jogo
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      // botao adquirido
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -114,7 +118,8 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                           ],
                         ),
                       ),
-                      
+
+                      // botao jogando
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -132,7 +137,9 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                           ],
                         ),
                       ),
-                                            InkWell(
+
+                      // botao zerado
+                      InkWell(
                         onTap: () {
                           setState(() {
                             widget.jogo.zerado = !widget.jogo.zerado;
@@ -151,7 +158,7 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20), 
+                  SizedBox(height: 20),
                 ],
               ),
             ),
