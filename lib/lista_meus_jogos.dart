@@ -14,12 +14,11 @@ class ListaMeusJogos extends StatefulWidget {
 }
 
 class _ListaMeusJogosState extends State<ListaMeusJogos> {
-  // Acessamos a lista global diretamente
 
   @override
   Widget build(BuildContext context) {
     if (widget.jogos.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
           "Nenhum jogo adicionado à biblioteca.",
           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -34,8 +33,6 @@ class _ListaMeusJogosState extends State<ListaMeusJogos> {
 
         return InkWell(
           onTap: () {
-            // Ao voltar da tela de detalhes, forçamos o setState para atualizar a lista
-            // caso o usuário tenha removido o jogo da biblioteca por lá.
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -44,7 +41,7 @@ class _ListaMeusJogosState extends State<ListaMeusJogos> {
             ).then((value) => setState(() {})); 
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
             child: Row(
               children: [
                 ClipRRect(
@@ -57,7 +54,7 @@ class _ListaMeusJogosState extends State<ListaMeusJogos> {
                   ),
                 ),
                 
-                const SizedBox(width: 16), 
+                SizedBox(width: 16), 
                 
                 Expanded(
                   child: Column(
@@ -65,13 +62,13 @@ class _ListaMeusJogosState extends State<ListaMeusJogos> {
                     children: [
                       Text(
                         jogo.nome,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                           color: Colors.white, 
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      SizedBox(height: 6),
                       Text(
                         jogo.plataforma.isNotEmpty ? jogo.plataforma : "N/A",
                         style: TextStyle(
@@ -85,7 +82,7 @@ class _ListaMeusJogosState extends State<ListaMeusJogos> {
                   ),
                 ),
                 
-                const Icon(Icons.arrow_forward, color: Colors.white),
+                Icon(Icons.arrow_forward, color: Colors.white),
               ],
             ),
           ),

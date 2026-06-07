@@ -32,7 +32,7 @@ class Jogos {
   });
 
   factory Jogos.fromJson(Map<String, dynamic> json) {
-    // 1. Tratar a Capa (Vertical)
+    // 1. Tratar a Capa 
     String urlCapa = 'https://via.placeholder.com/150';
     if (json['cover'] != null && json['cover']['url'] != null) {
       urlCapa = 'https:${json['cover']['url']}';
@@ -66,6 +66,4 @@ class Jogos {
     );
   }
 }
-
-// Lista global que o app todo usa
 List<Jogos> meusJogos = [];

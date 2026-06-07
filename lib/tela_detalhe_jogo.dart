@@ -1,7 +1,7 @@
 //pagina de cada jogo separadamente
 
 import 'package:flutter/material.dart';
-import 'jogos.dart'; // Importante para acessar a lista global 'meusJogos'
+import 'jogos.dart'; 
 
 class TelaDetalheJogo extends StatefulWidget {
   final Jogos jogo; 
@@ -17,11 +17,11 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 68, 70, 75),
+      backgroundColor: Color.fromARGB(255, 68, 70, 75),
       appBar: AppBar(
-        title: Text(widget.jogo.nome, style: const TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF1E1F22),
-        iconTheme: const IconThemeData(color: Colors.cyanAccent),
+        title: Text(widget.jogo.nome, style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF1E1F22),
+        iconTheme: IconThemeData(color: Colors.cyanAccent),
       ),
       
       body: SingleChildScrollView( 
@@ -36,7 +36,7 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
             ), 
             
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -52,7 +52,7 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      const SizedBox(width: 16), 
+                      SizedBox(width: 16), 
                       
                       Expanded(
                         child: Column(
@@ -60,15 +60,14 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                           children: [
                             Text(
                               widget.jogo.nome, 
-                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)
                             ),
-                            const SizedBox(height: 4),
-                            // Exibindo Plataformas (Corrigido)
+                            SizedBox(height: 4),
                             Text(
                               widget.jogo.plataforma.isNotEmpty 
                                   ? widget.jogo.plataforma 
                                   : "Plataforma indisponível",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 14, 
                                 fontStyle: FontStyle.italic, 
                                 color: Colors.grey
@@ -80,24 +79,21 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                     ],
                   ),
                   
-                  const Divider(height: 30, color: Colors.grey),
+                  Divider(height: 30, color: Colors.grey),
 
                   Text(
                     widget.jogo.descricao, 
-                    style: const TextStyle(fontSize: 16, color: Colors.white) 
+                    style: TextStyle(fontSize: 16, color: Colors.white) 
                   ),
-                  const Divider(height: 30, color: Colors.grey),
+                  Divider(height: 30, color: Colors.grey),
                   
-                  // BOTÕES DE CONTROLE
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // ADQUIRIDO
                       InkWell(
                         onTap: () {
                           setState(() {
                             widget.jogo.adquirido = !widget.jogo.adquirido;
-                            // Lógica Global
                             if (widget.jogo.adquirido) {
                               if (!meusJogos.contains(widget.jogo)) {
                                 meusJogos.add(widget.jogo);
@@ -113,13 +109,12 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                               Icons.shopping_cart_outlined,
                               color: widget.jogo.adquirido ? Colors.green : Colors.grey,
                             ),
-                            const SizedBox(width: 5),
-                            const Text("Adquirido", style: TextStyle(color: Colors.white)),
+                            SizedBox(width: 5),
+                            Text("Adquirido", style: TextStyle(color: Colors.white)),
                           ],
                         ),
                       ),
                       
-                      // JOGANDO
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -132,14 +127,12 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                               Icons.gamepad_outlined,
                               color: widget.jogo.jogando ? Colors.green : Colors.grey,
                             ),
-                            const SizedBox(width: 5),
-                            const Text("Jogando", style: TextStyle(color: Colors.white)),
+                            SizedBox(width: 5),
+                            Text("Jogando", style: TextStyle(color: Colors.white)),
                           ],
                         ),
                       ),
-                      
-                      // ZERADO
-                      InkWell(
+                                            InkWell(
                         onTap: () {
                           setState(() {
                             widget.jogo.zerado = !widget.jogo.zerado;
@@ -151,14 +144,14 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                               Icons.emoji_events_outlined,
                               color: widget.jogo.zerado ? Colors.green : Colors.grey,
                             ),
-                            const SizedBox(width: 5),
-                            const Text("Zerado", style: TextStyle(color: Colors.white)),
+                            SizedBox(width: 5),
+                            Text("Zerado", style: TextStyle(color: Colors.white)),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20), 
+                  SizedBox(height: 20), 
                 ],
               ),
             ),

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'lista_meus_jogos.dart';
 import 'tela_principal.dart'; 
-import 'jogos.dart'; // Importante para acessar a lista global 'meusJogos'
+import 'jogos.dart';
 
 class TelaMeusJogos extends StatefulWidget {
   @override
@@ -16,23 +16,22 @@ class _TelaMeusJogosState extends State<TelaMeusJogos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 68, 70, 75),
+      backgroundColor:  Color.fromARGB(255, 68, 70, 75),
       appBar: AppBar(
-        title: const Text("Game Hub", style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF1E1F22),
+        title:  Text("Game Hub", style: TextStyle(color: Colors.white)),
+        backgroundColor:  Color(0xFF1E1F22),
         automaticallyImplyLeading: false,
       ),
       
-      // Passamos a lista global 'meusJogos' diretamente para o componente
       body: ListaMeusJogos(jogos: meusJogos),
       
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _indiceSelecionado, 
-        backgroundColor: const Color(0xFF1E1F22),
-        selectedItemColor: const Color.fromARGB(255, 72, 27, 146),
+        backgroundColor:  Color(0xFF1E1F22),
+        selectedItemColor:  Color.fromARGB(255, 72, 27, 146),
         unselectedItemColor: Colors.white,
         type: BottomNavigationBarType.fixed,
-        items: const [
+        items:[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.gamepad), label: "Meus Jogos"),
         ],

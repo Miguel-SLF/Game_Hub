@@ -29,13 +29,13 @@ class _ListaJogosState extends State<ListaJogos> {
       future: _futurosJogos,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator(color: Colors.white));
+          return  Center(child: CircularProgressIndicator(color: Colors.white));
         } else if (snapshot.hasError) {
           return Center(
             child: Text('Erro ao carregar: ${snapshot.error}', style: const TextStyle(color: Colors.white)),
           );
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(
+          return  Center(
             child: Text('Nenhum jogo encontrado.', style: TextStyle(color: Colors.white)),
           );
         }
@@ -57,7 +57,7 @@ class _ListaJogosState extends State<ListaJogos> {
                 ).then((value) => setState(() {})); 
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                padding:  EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -69,12 +69,12 @@ class _ListaJogosState extends State<ListaJogos> {
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Container(
                           width: 70, height: 105, color: Colors.grey[900],
-                          child: const Center(child: CircularProgressIndicator(strokeWidth: 2, color: Colors.grey)),
+                          child:  Center(child: CircularProgressIndicator(strokeWidth: 2, color: Colors.grey)),
                         ),
                       ),
                     ),
                     
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     
                     Expanded(
                       child: Column(
@@ -82,22 +82,19 @@ class _ListaJogosState extends State<ListaJogos> {
                         children: [
                           Text(
                             jogo.nome,
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
                           ),
-                          const SizedBox(height: 6),
+                          SizedBox(height: 6),
                           Text(
                             jogo.plataforma,
-                            style: const TextStyle(fontSize: 13, color: Color.fromARGB(255, 119, 118, 118)),
+                            style: TextStyle(fontSize: 13, color: Color.fromARGB(255, 119, 118, 118)),
                             maxLines: 2, 
                             overflow: TextOverflow.ellipsis, 
                           ),
                         ],
                       ),
                     ),
-                    
-                    // O botão de "+" foi removido daqui para deixar a tela limpa.
-                    // Agora você pode adicionar o jogo pela tela de detalhes.
-                    const Icon(Icons.arrow_forward, color: Colors.white),
+                    Icon(Icons.arrow_forward, color: Colors.white),
                   ],
                 ),
               ),
