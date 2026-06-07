@@ -5,28 +5,43 @@ import 'jogos.dart';
 import 'tela_detalhe_jogo.dart';
 
 class ListaMeusJogos extends StatefulWidget {
+  final List<Jogos> jogos; // 1. Adicione esta linha
+
+  ListaMeusJogos({required this.jogos}); // 2. Adicione o construtor
+
   @override
-  State<StatefulWidget> createState() {
-    return _ListaMeusJogosState();
-  }
+  State<ListaMeusJogos> createState() => _ListaMeusJogosState();
 }
 
 class _ListaMeusJogosState extends State<ListaMeusJogos> {
-  List<Jogos> _jogos = meusJogos;
+  // Acessamos a lista global diretamente
 
   @override
   Widget build(BuildContext context) {
+    if (widget.jogos.isEmpty) {
+      return const Center(
+        child: Text(
+          "Nenhum jogo adicionado à biblioteca.",
+          style: TextStyle(color: Colors.white, fontSize: 16),
+        ),
+      );
+    }
+
     return ListView.builder(
-      itemCount: _jogos.length,
+      itemCount: widget.jogos.length,
       itemBuilder: (context, index) {
+        final jogo = widget.jogos[index];
+
         return InkWell(
           onTap: () {
+            // Ao voltar da tela de detalhes, forçamos o setState para atualizar a lista
+            // caso o usuário tenha removido o jogo da biblioteca por lá.
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => TelaDetalheJogo(jogo: _jogos[index]),
+                builder: (context) => TelaDetalheJogo(jogo: jogo),
               ),
-            );
+            ).then((value) => setState(() {})); 
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
@@ -35,8 +50,8 @@ class _ListaMeusJogosState extends State<ListaMeusJogos> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(6.0),
                   child: Image.network(
-                    _jogos[index].capa,
-                    width: 70,   
+                    jogo.capa,
+                    width: 70, 
                     height: 105, 
                     fit: BoxFit.cover, 
                   ),
@@ -49,7 +64,7 @@ class _ListaMeusJogosState extends State<ListaMeusJogos> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _jogos[index].nome,
+                        jogo.nome,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -58,7 +73,7 @@ class _ListaMeusJogosState extends State<ListaMeusJogos> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        _jogos[index].lojas.map((loja) => loja.nome).join(" | "),
+                        jogo.plataforma.isNotEmpty ? jogo.plataforma : "N/A",
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey.shade400, 

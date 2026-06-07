@@ -1,8 +1,7 @@
 //pagina de cada jogo separadamente
 
 import 'package:flutter/material.dart';
-import 'jogos.dart';
-import 'tela_meus_jogos.dart';
+import 'jogos.dart'; // Importante para acessar a lista global 'meusJogos'
 
 class TelaDetalheJogo extends StatefulWidget {
   final Jogos jogo; 
@@ -18,19 +17,17 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 68, 70, 75),
       appBar: AppBar(
-        title: Text(widget.jogo.nome, style: TextStyle(color: Colors.white)),
-        backgroundColor: Color(0xFF1E1F22),
-        iconTheme: const IconThemeData(
-          color: Colors.cyanAccent, // Coloquei o Ciano para combinar com o menu, mas pode ser Colors.white!
-        ),
+        title: Text(widget.jogo.nome, style: const TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFF1E1F22),
+        iconTheme: const IconThemeData(color: Colors.cyanAccent),
       ),
       
       body: SingleChildScrollView( 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
             Image.network(
               widget.jogo.banner,
               height: 180,
@@ -43,7 +40,6 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -56,7 +52,6 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      
                       const SizedBox(width: 16), 
                       
                       Expanded(
@@ -65,49 +60,66 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                           children: [
                             Text(
                               widget.jogo.nome, 
-                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)
                             ),
                             const SizedBox(height: 4),
+                            // Exibindo Plataformas (Corrigido)
                             Text(
-                              widget.jogo.lojas.map((l) => l.nome).join(" | "), 
-                              style: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic, color: Colors.grey)
-                            ), 
+                              widget.jogo.plataforma.isNotEmpty 
+                                  ? widget.jogo.plataforma 
+                                  : "Plataforma indisponível",
+                              style: const TextStyle(
+                                fontSize: 14, 
+                                fontStyle: FontStyle.italic, 
+                                color: Colors.grey
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
                   
-                  const Divider(height: 30),
+                  const Divider(height: 30, color: Colors.grey),
 
                   Text(
                     widget.jogo.descricao, 
-                    style: const TextStyle(fontSize: 16) 
+                    style: const TextStyle(fontSize: 16, color: Colors.white) 
                   ),
-                  const Divider(height: 30),
+                  const Divider(height: 30, color: Colors.grey),
                   
+                  // BOTÕES DE CONTROLE
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      // ADQUIRIDO
                       InkWell(
                         onTap: () {
                           setState(() {
                             widget.jogo.adquirido = !widget.jogo.adquirido;
+                            // Lógica Global
+                            if (widget.jogo.adquirido) {
+                              if (!meusJogos.contains(widget.jogo)) {
+                                meusJogos.add(widget.jogo);
+                              }
+                            } else {
+                              meusJogos.remove(widget.jogo);
+                            }
                           });
                         },
                         child: Row(
-                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
                               Icons.shopping_cart_outlined,
                               color: widget.jogo.adquirido ? Colors.green : Colors.grey,
                             ),
                             const SizedBox(width: 5),
-                            const Text("Adquirido"),
+                            const Text("Adquirido", style: TextStyle(color: Colors.white)),
                           ],
                         ),
                       ),
                       
+                      // JOGANDO
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -115,18 +127,18 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                           });
                         },
                         child: Row(
-                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
                               Icons.gamepad_outlined,
                               color: widget.jogo.jogando ? Colors.green : Colors.grey,
                             ),
                             const SizedBox(width: 5),
-                            const Text("Jogando"),
+                            const Text("Jogando", style: TextStyle(color: Colors.white)),
                           ],
                         ),
                       ),
                       
+                      // ZERADO
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -134,14 +146,13 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
                           });
                         },
                         child: Row(
-                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
                               Icons.emoji_events_outlined,
                               color: widget.jogo.zerado ? Colors.green : Colors.grey,
                             ),
                             const SizedBox(width: 5),
-                            const Text("Zerado"),
+                            const Text("Zerado", style: TextStyle(color: Colors.white)),
                           ],
                         ),
                       ),
@@ -153,27 +164,6 @@ class _TelaDetalheJogoState extends State<TelaDetalheJogo> {
             ),
           ],
         ),
-      ),
-      
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xFF1E1F22),
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.gamepad), label: "Meus Jogos"),
-        ],
-        onTap: (int index) {
-          if (index == 0) {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          } else if (index == 1) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => TelaMeusJogos()), 
-            );
-          }
-        },
       ),
     );
   }
