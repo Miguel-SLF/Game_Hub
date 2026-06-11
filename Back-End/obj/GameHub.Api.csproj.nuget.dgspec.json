@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/alecsandro/querino_final/back-end/GameHub.Api.csproj": {}
+    "/home/alecsandro/querino_final/Back-End/GameHub.Api.csproj": {}
   },
   "projects": {
-    "/home/alecsandro/querino_final/back-end/GameHub.Api.csproj": {
+    "/home/alecsandro/querino_final/Back-End/GameHub.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/alecsandro/querino_final/back-end/GameHub.Api.csproj",
+        "projectUniqueName": "/home/alecsandro/querino_final/Back-End/GameHub.Api.csproj",
         "projectName": "GameHub.Api",
-        "projectPath": "/home/alecsandro/querino_final/back-end/GameHub.Api.csproj",
+        "projectPath": "/home/alecsandro/querino_final/Back-End/GameHub.Api.csproj",
         "packagesPath": "/home/alecsandro/.nuget/packages/",
-        "outputPath": "/home/alecsandro/querino_final/back-end/obj/",
+        "outputPath": "/home/alecsandro/querino_final/Back-End/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/alecsandro/.nuget/NuGet/NuGet.Config"

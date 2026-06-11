@@ -18,6 +18,7 @@ class ListaJogos extends StatefulWidget {
 class _ListaJogosState extends State<ListaJogos> {
   final ApiService apiService = ApiService();
   final BackendService backendService = BackendService();
+  final TextEditingController _controladorPesquisa = TextEditingController();
   late Future<List<Jogos>> _futurosJogos;
 
   // inicia a busca dos jogos assim que o widget é criado
@@ -27,9 +28,27 @@ class _ListaJogosState extends State<ListaJogos> {
     _futurosJogos = _carregarJogos();
   }
 
+  @override
+  void dispose() {
+    _controladorPesquisa.dispose();
+    super.dispose();
+  }
+
+  // refaz a busca usando o que foi digitado no campo
+  void _pesquisar() {
+    setState(() {
+      _futurosJogos = _carregarJogos();
+    });
+  }
+
   // busca os jogos na IGDB e aplica por cima os status salvos no banco
   Future<List<Jogos>> _carregarJogos() async {
-    final jogos = await apiService.buscarJogosEmAlta();
+    final nome = _controladorPesquisa.text.trim();
+
+    // se o campo estiver vazio mostra os jogos em alta, senão pesquisa pelo nome
+    final jogos = nome.isEmpty
+        ? await apiService.buscarJogosEmAlta()
+        : await apiService.buscarJogosPorNome(nome);
 
     try {
       final salvos = await backendService.buscarTodosStatus();
@@ -53,7 +72,62 @@ class _ListaJogosState extends State<ListaJogos> {
 
   @override
   Widget build(BuildContext context) {
-    // aguarda a resposta da API antes de renderizar a lista
+    return Column(
+      children: [
+        // campo de pesquisa com o botão de lupa do lado
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+          child: Row(
+            children: [
+              // campo para digitar o nome do jogo
+              Expanded(
+                child: TextField(
+                  controller: _controladorPesquisa,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: 'Pesquisar jogo...',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Color(0xFF1E1F22),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                  // pesquisa tambem ao apertar enter no teclado
+                  onSubmitted: (value) => _pesquisar(),
+                ),
+              ),
+
+              SizedBox(width: 10),
+
+              // botao redondo com a lupa
+              InkWell(
+                onTap: _pesquisar,
+                borderRadius: BorderRadius.circular(25.0),
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromARGB(255, 72, 27, 146),
+                  ),
+                  child: Icon(Icons.search, color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // lista de jogos abaixo do campo de pesquisa
+        Expanded(child: _montarLista()),
+      ],
+    );
+  }
+
+  // aguarda a resposta da API antes de renderizar a lista
+  Widget _montarLista() {
     return FutureBuilder<List<Jogos>>(
       future: _futurosJogos,
       builder: (context, snapshot) {

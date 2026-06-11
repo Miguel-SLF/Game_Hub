@@ -34,4 +34,28 @@ class ApiService {
       throw Exception('Falha ao carregar os jogos');
     }
   }
+
+  // busca jogos pelo nome digitado na pesquisa
+  Future<List<Jogos>> buscarJogosPorNome(String nome) async {
+    final response = await http.post(
+      Uri.parse(_url),
+      headers: {
+        'Client-ID': _clientId,
+        'Authorization': 'Bearer $_token',
+        'Accept': 'application/json',
+      },
+      // pesquisa pelo nome, somente jogos com capa
+      body: 'search "$nome"; fields id, name, cover.url, platforms.name, summary, artworks.url; where cover != null; limit 20;',
+    );
+
+    // converte o JSON para uma lista de Jogos
+    if (response.statusCode == 200) {
+      final List dados = json.decode(response.body);
+      return dados.map((json) => Jogos.fromJson(json)).toList();
+    } else {
+      // exceção de erro
+      print('Erro da IGDB: ${response.body}');
+      throw Exception('Falha ao pesquisar os jogos');
+    }
+  }
 }

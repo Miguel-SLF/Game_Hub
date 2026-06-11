@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pHgoDnfvfmE=",
+  "dgSpecHash": "JOwLp22kCkc=",
   "success": true,
-  "projectFilePath": "/home/alecsandro/querino_final/back-end/GameHub.Api.csproj",
+  "projectFilePath": "/home/alecsandro/querino_final/Back-End/GameHub.Api.csproj",
   "expectedPackageFiles": [
     "/home/alecsandro/.nuget/packages/microsoft.data.sqlite.core/9.0.17/microsoft.data.sqlite.core.9.0.17.nupkg.sha512",
     "/home/alecsandro/.nuget/packages/microsoft.entityframeworkcore/9.0.17/microsoft.entityframeworkcore.9.0.17.nupkg.sha512",

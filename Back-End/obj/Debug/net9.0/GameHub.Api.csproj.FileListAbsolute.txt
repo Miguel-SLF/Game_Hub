@@ -67,3 +67,4 @@
 /home/alecsandro/querino_final/back-end/obj/Debug/net9.0/GameHub.Api.pdb
 /home/alecsandro/querino_final/back-end/obj/Debug/net9.0/GameHub.Api.genruntimeconfig.cache
 /home/alecsandro/querino_final/back-end/obj/Debug/net9.0/ref/GameHub.Api.dll
+/home/alecsandro/querino_final/Back-End/obj/Debug/net9.0/GameHub.Api.sourcelink.json
