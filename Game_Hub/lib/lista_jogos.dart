@@ -74,7 +74,6 @@ class _ListaJogosState extends State<ListaJogos> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // campo de pesquisa com o botão de lupa do lado
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
           child: Row(

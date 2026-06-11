@@ -1,5 +1,3 @@
-// adaptador de saída: implementa a porta de persistência usando EF Core + SQLite
-
 using GameHub.Api.Application.Ports;
 using GameHub.Api.Domain;
 using Microsoft.EntityFrameworkCore;

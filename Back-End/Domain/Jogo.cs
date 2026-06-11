@@ -1,5 +1,3 @@
-// entidade de domínio que representa um jogo da biblioteca do usuário
-
 namespace GameHub.Api.Domain;
 
 public class Jogo

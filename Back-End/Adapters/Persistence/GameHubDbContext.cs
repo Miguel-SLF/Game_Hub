@@ -1,5 +1,3 @@
-// contexto do EF Core que mapeia a entidade Jogo para o banco SQLite
-
 using GameHub.Api.Domain;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,5 +1,3 @@
-// implementação dos casos de uso, núcleo da aplicação sem dependência de framework
-
 using GameHub.Api.Application.Ports;
 using GameHub.Api.Domain;
 
@@ -50,7 +48,6 @@ public class JogoService : IJogoService
             return jogo;
         }
 
-        // atualiza os dados e os status do jogo já salvo
         existente.Nome = jogo.Nome;
         existente.Capa = jogo.Capa;
         existente.Banner = jogo.Banner;
